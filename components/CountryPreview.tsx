@@ -13,7 +13,7 @@ export default function CountryPreview({
     <div
       className={cn(
         className,
-        "h-[17rem] w-60 overflow-clip rounded-md shadow-md",
+        "h-[17rem] w-60 cursor-pointer overflow-clip rounded-md bg-white shadow-md",
       )}
     >
       <div className="relative aspect-[2/3] h-32 w-full">

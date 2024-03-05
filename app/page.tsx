@@ -15,10 +15,10 @@ export default async function Home() {
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <div className="text-sm">
+    <div className="text-sm">
+      <HydrationBoundary state={dehydrate(queryClient)}>
         <CountriesList />
-      </div>
-    </HydrationBoundary>
+      </HydrationBoundary>
+    </div>
   );
 }

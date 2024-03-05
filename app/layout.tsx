@@ -25,9 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={nunitoSans.className}>
+      <body className={`bg-veryLightGray ${nunitoSans.className}`}>
         <Header />
-        <main className="container mx-auto">
+        <main className="text-veryDarkBlue-lightText container mx-auto">
           <Providers>
             <Filters />
             {children}
