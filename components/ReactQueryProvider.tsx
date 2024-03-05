@@ -1,16 +1,30 @@
-"use client";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+} from "@tanstack/react-query";
+import { ReactNode } from "react";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactNode, useState } from "react";
+export async function getStaticProps() {}
 
-export default function ReactQueryProvider({
+export default async function ReactQueryProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const [queryClient] = useState(new QueryClient());
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["countries"],
+    queryFn: () =>
+      fetch(
+        "https://restcountries.com/v3.1/all?fields=name,capital,region",
+      ).then((res) => res.json()),
+  });
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      {children}
+    </HydrationBoundary>
   );
 }

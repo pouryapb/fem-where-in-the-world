@@ -2,10 +2,10 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
-import Header from "../components/Header";
-import ReactQueryProvider from "../components/ReactQueryProvider";
-import "./globals.css";
 import Filters from "../components/Filters";
+import Header from "../components/Header";
+import "./globals.css";
+import Providers from "./providers";
 config.autoAddCss = false;
 
 const nunitoSans = Nunito_Sans({
@@ -28,10 +28,10 @@ export default function RootLayout({
       <body className={nunitoSans.className}>
         <Header />
         <main className="container mx-auto">
-          <ReactQueryProvider>
+          <Providers>
             <Filters />
             {children}
-          </ReactQueryProvider>
+          </Providers>
         </main>
       </body>
     </html>
