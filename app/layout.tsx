@@ -1,8 +1,16 @@
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito_Sans } from "next/font/google";
+import Header from "./components/Header";
+import ReactQueryProvider from "./components/ReactQueryProvider";
 import "./globals.css";
+config.autoAddCss = false;
 
-const inter = Inter({ subsets: ["latin"] });
+const nunitoSans = Nunito_Sans({
+  subsets: ["latin"],
+  weight: ["300", "600", "800"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={nunitoSans.className}>
+        <Header />
+        <main className="container mx-auto">
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </main>
+      </body>
     </html>
   );
 }
