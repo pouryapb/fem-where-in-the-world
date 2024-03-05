@@ -5,6 +5,7 @@ import { Nunito_Sans } from "next/font/google";
 import Header from "./components/Header";
 import ReactQueryProvider from "./components/ReactQueryProvider";
 import "./globals.css";
+import Filters from "./components/Filters";
 config.autoAddCss = false;
 
 const nunitoSans = Nunito_Sans({
@@ -27,7 +28,10 @@ export default function RootLayout({
       <body className={nunitoSans.className}>
         <Header />
         <main className="container mx-auto">
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            <Filters />
+            {children}
+          </ReactQueryProvider>
         </main>
       </body>
     </html>
