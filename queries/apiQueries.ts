@@ -1,4 +1,5 @@
 import {
+  BorderName,
   CountryDetailResponse,
   CountryPreviewResponse,
 } from "@/types/responses";
@@ -14,4 +15,11 @@ export const countryDetailsQueryFn = (
 ): Promise<CountryDetailResponse[]> =>
   fetch(
     `https://restcountries.com/v3.1/name/${context.queryKey[1]}?fullText=true`,
+  ).then((res) => res.json());
+
+export const bordersQueryFn = (
+  context: QueryFunctionContext,
+): Promise<BorderName[]> =>
+  fetch(
+    `https://restcountries.com/v3.1/alpha?codes=${(context.queryKey[1] as string[]).join(",")}&fields=name`,
   ).then((res) => res.json());

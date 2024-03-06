@@ -18,6 +18,19 @@ export interface CountryPreviewResponse {
   };
 }
 
+export interface BorderName {
+  name: {
+    common: string;
+    official: string;
+    nativeName: {
+      [key: string]: {
+        common: string;
+        official: string;
+      };
+    };
+  };
+}
+
 export interface CountryDetailResponse {
   name: {
     common: string;

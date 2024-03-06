@@ -1,27 +1,34 @@
 "use client";
 
-import { countryDetailsQueryFn } from "@/queries/apiQueries";
+import { bordersQueryFn, countryDetailsQueryFn } from "@/queries/apiQueries";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
+import Border from "./Border";
 
 export default function CountryDetails() {
   const params = useSearchParams();
 
-  const { data, isLoading, isFetching, isSuccess } = useQuery({
+  const countries = useQuery({
     queryKey: ["countries", params.get("country")],
     queryFn: countryDetailsQueryFn,
   });
 
-  if (isLoading || isFetching) {
+  const borders = useQuery({
+    queryKey: ["borders", countries.data![0].borders],
+    queryFn: bordersQueryFn,
+    enabled: countries.isSuccess,
+  });
+
+  if (countries.isLoading || countries.isFetching) {
     return <p>Loading...</p>;
   }
 
-  if (isSuccess) {
-    const country = data[0];
+  if (countries.isSuccess) {
+    const country = countries.data[0];
     return (
       <div className="flex flex-row items-center gap-20">
-        <div className="relative aspect-[4/3] w-96">
+        <div className="relative aspect-[4/3] flex-1">
           <Image
             className="object-contain"
             alt={country.flags.alt}
@@ -31,12 +38,12 @@ export default function CountryDetails() {
             priority
           />
         </div>
-        <div>
+        <div className="flex-[2]">
           <p className="mb-5 text-2xl font-extrabold">{country.name.common}</p>
           <div className="columns-2 space-y-1">
             <p>
               <span className="font-semibold">Native Name: </span>
-              {country.name.nativeName["nld"].common}
+              {Object.values(country.name.nativeName)[0].common}
             </p>
             <p>
               <span className="font-semibold">Population: </span>
@@ -70,9 +77,16 @@ export default function CountryDetails() {
             </p>
           </div>
           <div className="mt-12">
-            <p>
+            <p className="inline-flex flex-wrap items-center gap-3">
               <span className="font-semibold">Border Countries: </span>
-              {country.borders.join(", ")}
+              {borders.isFetching || borders.isLoading ? (
+                <span>Loading...</span>
+              ) : (
+                (borders.isSuccess &&
+                  borders.data.map((border, i) => (
+                    <Border key={`border-${i}`} name={border.name.common} />
+                  ))) || <span>Failed to load borders!</span>
+              )}
             </p>
           </div>
         </div>
