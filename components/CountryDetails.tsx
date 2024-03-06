@@ -65,7 +65,9 @@ export default function CountryDetails() {
             </p>
             <p>
               <span className="font-semibold">Currencies: </span>
-              {Object.values(country.currencies).join(", ")}
+              {Object.values(country.currencies)
+                .map((v) => v.name)
+                .join(", ")}
             </p>
             <p>
               <span className="font-semibold">Top Level Domain: </span>

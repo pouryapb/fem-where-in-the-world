@@ -20,18 +20,45 @@ export default function FilterByRegion() {
 
   return (
     <Select onValueChange={handleOnChange} value={filter}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className="w-[180px] dark:bg-darkBlue dark:text-white">
         <SelectValue placeholder="Filter by Region" />
       </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="reset">Reset</SelectItem>
+      <SelectContent className="dark:bg-darkBlue dark:text-white">
+        <SelectItem className="dark:focus:bg-veryDarkBlue-darkBg" value="reset">
+          Reset
+        </SelectItem>
         <SelectGroup>
           <SelectLabel>Regions</SelectLabel>
-          <SelectItem value="africa">Africa</SelectItem>
-          <SelectItem value="america">America</SelectItem>
-          <SelectItem value="asia">Asia</SelectItem>
-          <SelectItem value="europe">Europe</SelectItem>
-          <SelectItem value="oceania">Oceania</SelectItem>
+          <SelectItem
+            className="dark:focus:bg-veryDarkBlue-darkBg"
+            value="africa"
+          >
+            Africa
+          </SelectItem>
+          <SelectItem
+            className="dark:focus:bg-veryDarkBlue-darkBg"
+            value="america"
+          >
+            America
+          </SelectItem>
+          <SelectItem
+            className="dark:focus:bg-veryDarkBlue-darkBg"
+            value="asia"
+          >
+            Asia
+          </SelectItem>
+          <SelectItem
+            className="dark:focus:bg-veryDarkBlue-darkBg"
+            value="europe"
+          >
+            Europe
+          </SelectItem>
+          <SelectItem
+            className="dark:focus:bg-veryDarkBlue-darkBg"
+            value="oceania"
+          >
+            Oceania
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

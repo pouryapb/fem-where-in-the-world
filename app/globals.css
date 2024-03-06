@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .btn {
-  @apply space-x-2 rounded-md p-2 ring-1 ring-neutral-200 hover:bg-neutral-100 hover:ring-neutral-300 active:bg-neutral-200 active:ring-neutral-400;
+  @apply space-x-2 rounded-md p-2 ring-1 ring-neutral-200 hover:bg-neutral-100 hover:ring-neutral-300 active:bg-neutral-200 active:ring-neutral-400 dark:bg-veryDarkBlue-darkBg dark:text-white dark:ring-slate-900 dark:hover:bg-slate-800 dark:hover:ring-slate-700 dark:active:bg-slate-700 dark:active:ring-slate-600;
 }

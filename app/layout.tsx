@@ -23,12 +23,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`bg-veryLightGray ${nunitoSans.className}`}>
-        <Header />
-        <main className="container mx-auto text-veryDarkBlue-lightText">
-          <Providers>{children}</Providers>
-        </main>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`bg-veryLightGray text-veryDarkBlue-lightText dark:bg-veryDarkBlue-darkBg dark:text-white ${nunitoSans.className}`}
+      >
+        <Providers
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main className="container mx-auto text-veryDarkBlue-lightText">
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );

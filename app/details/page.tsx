@@ -21,7 +21,7 @@ export default async function Details({
   });
 
   return (
-    <div className="text-base">
+    <div className="text-base dark:text-white">
       <div className="my-14">
         <BackNavigator />
       </div>

@@ -20,7 +20,7 @@ export default function CountryPreview({
       }}
       className={cn(
         className,
-        "h-[17rem] w-60 overflow-clip rounded-md bg-white shadow-md",
+        "h-[17rem] w-60 overflow-clip rounded-md bg-white shadow-md dark:bg-darkBlue dark:text-white",
       )}
     >
       <div className="relative aspect-[2/3] h-32 w-full">
