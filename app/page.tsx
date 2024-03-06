@@ -1,4 +1,5 @@
 import CountriesList from "@/components/CountriesList";
+import Filters from "@/components/Filters";
 import { countriesPreviewQueryFn } from "@/queries/apiQueries";
 import {
   HydrationBoundary,
@@ -15,10 +16,13 @@ export default async function Home() {
   });
 
   return (
-    <div className="text-sm">
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <CountriesList />
-      </HydrationBoundary>
-    </div>
+    <>
+      <Filters />
+      <div className="text-sm">
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <CountriesList />
+        </HydrationBoundary>
+      </div>
+    </>
   );
 }

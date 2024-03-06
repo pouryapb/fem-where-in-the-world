@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { CountryPreviewResponse } from "@/types/responses";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CountryPreview({
   country,
@@ -10,10 +11,16 @@ export default function CountryPreview({
   className?: string;
 }) {
   return (
-    <div
+    <Link
+      href={{
+        pathname: "/details",
+        query: {
+          country: country.name.common,
+        },
+      }}
       className={cn(
         className,
-        "h-[17rem] w-60 cursor-pointer overflow-clip rounded-md bg-white shadow-md",
+        "h-[17rem] w-60 overflow-clip rounded-md bg-white shadow-md",
       )}
     >
       <div className="relative aspect-[2/3] h-32 w-full">
@@ -43,6 +50,6 @@ export default function CountryPreview({
           <span>{country.capital.join(", ")}</span>
         </p>
       </div>
-    </div>
+    </Link>
   );
 }
