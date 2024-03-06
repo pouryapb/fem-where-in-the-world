@@ -4,11 +4,22 @@ import {
   CountryPreviewResponse,
 } from "@/types/responses";
 import { QueryFunctionContext } from "@tanstack/react-query";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
-export const countriesPreviewQueryFn = (): Promise<CountryPreviewResponse[]> =>
-  fetch(
-    "https://restcountries.com/v3.1/all?fields=name,capital,region,flags,population",
-  ).then((res) => res.json());
+export const countriesPreviewQueryFn = (
+  context: QueryFunctionContext,
+): Promise<CountryPreviewResponse[]> => {
+  let url =
+    "https://restcountries.com/v3.1/all?fields=name,capital,region,flags,population";
+  const params = context.queryKey[1] as ReadonlyURLSearchParams;
+
+  if (params && params.has("search")) {
+    url = `https://restcountries.com/v3.1/name/${params.get("search")}?fullText=true&fields=name,capital,region,flags,population`;
+  }
+
+  const query = fetch(url).then((res) => res.json());
+  return query;
+};
 
 export const countryDetailsQueryFn = (
   context: QueryFunctionContext,

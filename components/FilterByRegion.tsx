@@ -15,7 +15,7 @@ export default function FilterByRegion() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState(searchParams.get("region") ?? "");
 
   const handleOnChange = (value: string) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));

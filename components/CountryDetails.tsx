@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import Border from "./Border";
+import Loading from "./Loading";
 
 export default function CountryDetails() {
   const params = useSearchParams();
@@ -21,7 +22,7 @@ export default function CountryDetails() {
   });
 
   if (countries.isLoading || countries.isFetching) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (countries.isSuccess) {
@@ -82,7 +83,7 @@ export default function CountryDetails() {
             <p className="inline-flex flex-wrap items-center gap-3">
               <span className="font-semibold">Border Countries: </span>
               {borders.isFetching || borders.isLoading ? (
-                <span>Loading...</span>
+                <Loading />
               ) : (
                 (borders.isSuccess &&
                   borders.data.map((border, i) => (

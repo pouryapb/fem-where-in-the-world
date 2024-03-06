@@ -3,16 +3,25 @@ import { countriesPreviewQueryFn } from "@/queries/apiQueries";
 import { useQuery } from "@tanstack/react-query";
 import CountryPreview from "./CountryPreview";
 import { useSearchParams } from "next/navigation";
+import Loading from "./Loading";
 
 export default function CountriesList() {
   const params = useSearchParams();
 
   const { data, isSuccess, isPending, isFetching } = useQuery({
-    queryKey: ["countries"],
+    queryKey: ["countries", params],
     queryFn: countriesPreviewQueryFn,
   });
 
   if (isSuccess) {
+    if (data.length === 0) {
+      return (
+        <span className="text-veryDarkBlue-lightText dark:text-white">
+          No Results Found.
+        </span>
+      );
+    }
+
     const hasRegion = params.has("region");
     let result = data;
     if (hasRegion) {
@@ -31,6 +40,6 @@ export default function CountriesList() {
   }
 
   if (isPending || isFetching) {
-    return <p>Loading data...</p>;
+    return <Loading />;
   }
 }
