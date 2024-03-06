@@ -16,6 +16,7 @@ export interface CountryPreviewResponse {
     png: string;
     svg: string;
   };
+  population: number;
 }
 
 export interface BorderName {

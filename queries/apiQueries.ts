@@ -7,7 +7,7 @@ import { QueryFunctionContext } from "@tanstack/react-query";
 
 export const countriesPreviewQueryFn = (): Promise<CountryPreviewResponse[]> =>
   fetch(
-    "https://restcountries.com/v3.1/all?fields=name,capital,region,flags",
+    "https://restcountries.com/v3.1/all?fields=name,capital,region,flags,population",
   ).then((res) => res.json());
 
 export const countryDetailsQueryFn = (

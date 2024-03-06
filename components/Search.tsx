@@ -13,7 +13,7 @@ export default function Search({
         <FontAwesomeIcon className="text-gray-500" icon={faSearch} />
       </div>
       <input
-        className="block w-96 rounded-md border-0 py-2.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-darkBlue sm:text-sm sm:leading-6"
+        className="block w-96 rounded-md border-0 py-2.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-darkBlue dark:text-white sm:text-sm sm:leading-6"
         onClick={onClick}
         placeholder="Search for a country"
         type="search"

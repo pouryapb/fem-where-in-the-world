@@ -18,7 +18,7 @@ export default async function Home() {
   return (
     <>
       <Filters />
-      <div className="text-sm">
+      <div className="mb-10 text-sm">
         <HydrationBoundary state={dehydrate(queryClient)}>
           <CountriesList />
         </HydrationBoundary>

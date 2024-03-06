@@ -37,7 +37,7 @@ export default function CountryPreview({
         <p className="mb-3 mt-4 font-extrabold">{country.name.common}</p>
         <p>
           <span className="font-semibold">Population: </span>
-          <span>{"1"}</span>
+          <span>{new Intl.NumberFormat().format(country.population)}</span>
         </p>
         <p>
           <span className="font-semibold">Region: </span>
