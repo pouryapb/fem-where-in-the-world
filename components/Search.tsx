@@ -9,23 +9,17 @@ export default function Search() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const timer = useRef<NodeJS.Timeout | null>(null);
-
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
-    if (timer.current) {
-      clearTimeout(timer.current);
+
+    if (event.target.value === "") {
+      current.delete("search");
+    } else {
+      current.set("search", event.target.value);
     }
-    timer.current = setTimeout(() => {
-      timer.current = null;
-      if (event.target.value === "") {
-        current.delete("search");
-      } else {
-        current.set("search", event.target.value);
-      }
-      const search = current.toString();
-      router.push(`${pathname}?${search}`);
-    }, 200);
+
+    const search = current.toString();
+    router.push(`${pathname}?${search}`);
   };
 
   return (
@@ -35,7 +29,7 @@ export default function Search() {
       </div>
       <input
         defaultValue={searchParams.get("search") ?? ""}
-        className="block w-96 rounded-md border-0 py-2.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-darkBlue dark:text-white sm:text-sm sm:leading-6"
+        className="block w-full rounded-md border-0 py-2.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 dark:bg-darkBlue dark:text-white sm:w-96 sm:text-sm sm:leading-6"
         onChange={handleChange}
         placeholder="Search for a country"
         type="search"

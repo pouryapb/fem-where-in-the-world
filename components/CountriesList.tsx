@@ -9,12 +9,12 @@ export default function CountriesList() {
   const params = useSearchParams();
 
   const { data, isSuccess, isPending, isFetching } = useQuery({
-    queryKey: ["countries", params],
+    queryKey: ["countries", params.get("search")],
     queryFn: countriesPreviewQueryFn,
   });
 
   if (isSuccess) {
-    if (data.length === 0) {
+    if (data.length === 0 || !Array.isArray(data)) {
       return (
         <span className="text-veryDarkBlue-lightText dark:text-white">
           No Results Found.
@@ -31,7 +31,7 @@ export default function CountriesList() {
       );
     }
     return (
-      <div className="gap-15 inline-grid w-full grid-cols-4 place-items-center gap-y-16">
+      <div className="sm:gap-15 flex w-full flex-col place-items-center gap-y-16 sm:inline-grid sm:grid-cols-4">
         {result.map((country, i) => {
           return <CountryPreview country={country} key={`ctry-${i}`} />;
         })}

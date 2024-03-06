@@ -7,11 +7,15 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ["countries"],
+    queryKey: ["countries", searchParams?.["search"]],
     queryFn: countriesPreviewQueryFn,
   });
 

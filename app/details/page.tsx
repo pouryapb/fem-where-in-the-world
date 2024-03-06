@@ -22,7 +22,7 @@ export default async function Details({
 
   return (
     <div className="text-base dark:text-white">
-      <div className="my-14">
+      <div className="my-10 sm:my-14">
         <BackNavigator />
       </div>
       <Suspense fallback={null}>

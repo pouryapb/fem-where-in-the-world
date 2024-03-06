@@ -28,8 +28,8 @@ export default function CountryDetails() {
   if (countries.isSuccess) {
     const country = countries.data[0];
     return (
-      <div className="flex flex-row items-center gap-20">
-        <div className="relative aspect-[4/3] flex-1">
+      <div className="mb-8 flex flex-col items-center gap-8 sm:flex-row sm:gap-20">
+        <div className="relative h-52 w-full sm:aspect-[4/3] sm:h-auto sm:flex-1">
           <Image
             className="object-contain"
             alt={country.flags.alt}
@@ -39,9 +39,9 @@ export default function CountryDetails() {
             priority
           />
         </div>
-        <div className="flex-[2]">
+        <div className="w-full sm:w-auto sm:flex-[2]">
           <p className="mb-5 text-2xl font-extrabold">{country.name.common}</p>
-          <div className="columns-2 space-y-1">
+          <div className="space-y-2 sm:columns-2 sm:space-y-1">
             <p>
               <span className="font-semibold">Native Name: </span>
               {Object.values(country.name.nativeName)[0].common}
@@ -81,14 +81,17 @@ export default function CountryDetails() {
           </div>
           <div className="mt-12">
             <p className="inline-flex flex-wrap items-center gap-3">
-              <span className="font-semibold">Border Countries: </span>
+              <span className="w-full font-semibold sm:w-auto">
+                Border Countries:{" "}
+              </span>
               {borders.isFetching || borders.isLoading ? (
                 <Loading />
+              ) : borders.isSuccess ? (
+                borders.data.map((border, i) => (
+                  <Border key={`border-${i}`} name={border.name.common} />
+                ))
               ) : (
-                (borders.isSuccess &&
-                  borders.data.map((border, i) => (
-                    <Border key={`border-${i}`} name={border.name.common} />
-                  ))) || <span>Failed to load borders!</span>
+                <span>Failed to load borders!</span>
               )}
             </p>
           </div>

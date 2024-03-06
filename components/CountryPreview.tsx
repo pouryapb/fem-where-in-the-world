@@ -20,10 +20,10 @@ export default function CountryPreview({
       }}
       className={cn(
         className,
-        "h-[17rem] w-60 overflow-clip rounded-md bg-white shadow-md dark:bg-darkBlue dark:text-white",
+        "h-96 w-72 overflow-clip rounded-md bg-white text-lg shadow-md dark:bg-darkBlue dark:text-white sm:h-[17rem] sm:w-60 sm:text-base",
       )}
     >
-      <div className="relative aspect-[2/3] h-32 w-full">
+      <div className="relative aspect-[3/2] w-full sm:aspect-[2/3] sm:h-32">
         <Image
           className="object-contain"
           alt={country.flags.alt}

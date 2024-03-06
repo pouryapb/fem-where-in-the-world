@@ -11,10 +11,10 @@ export const countriesPreviewQueryFn = (
 ): Promise<CountryPreviewResponse[]> => {
   let url =
     "https://restcountries.com/v3.1/all?fields=name,capital,region,flags,population";
-  const params = context.queryKey[1] as ReadonlyURLSearchParams;
+  const search = context.queryKey[1];
 
-  if (params && params.has("search")) {
-    url = `https://restcountries.com/v3.1/name/${params.get("search")}?fullText=true&fields=name,capital,region,flags,population`;
+  if (search && search !== "") {
+    url = `https://restcountries.com/v3.1/name/${search}?fullText=true&fields=name,capital,region,flags,population`;
   }
 
   const query = fetch(url).then((res) => res.json());
