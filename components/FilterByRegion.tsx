@@ -1,4 +1,5 @@
 "use client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import {
   Select,
@@ -11,11 +12,23 @@ import {
 } from "./ui/select";
 
 export default function FilterByRegion() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [filter, setFilter] = useState("");
 
   const handleOnChange = (value: string) => {
-    if (value === "reset") setFilter("");
-    else setFilter(value);
+    const current = new URLSearchParams(Array.from(searchParams.entries()));
+    if (value === "reset") {
+      setFilter("");
+      current.delete("region");
+    } else {
+      setFilter(value);
+      current.set("region", value);
+    }
+
+    const search = current.toString();
+    router.push(`${pathname}?${search}`);
   };
 
   return (
@@ -37,7 +50,7 @@ export default function FilterByRegion() {
           </SelectItem>
           <SelectItem
             className="dark:focus:bg-veryDarkBlue-darkBg"
-            value="america"
+            value="americas"
           >
             America
           </SelectItem>
