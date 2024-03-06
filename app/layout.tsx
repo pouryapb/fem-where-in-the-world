@@ -13,7 +13,7 @@ const nunitoSans = Nunito_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "REST Countries API",
+  title: "Where in the world?",
   description: "REST Countries API with color theme switcher",
 };
 
