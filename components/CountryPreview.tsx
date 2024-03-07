@@ -30,7 +30,6 @@ export default function CountryPreview({
           src={country.flags.png}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
         />
       </div>
       <div className="w-full grow pl-5">
