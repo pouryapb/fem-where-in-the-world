@@ -18,7 +18,7 @@ export default function CountryDetails() {
   const borders = useQuery({
     queryKey: ["borders", countries.data![0].borders],
     queryFn: bordersQueryFn,
-    enabled: countries.isSuccess && countries.data[0].borders.length !== 0,
+    enabled: countries.isSuccess && countries.data[0].borders.length > 0,
   });
 
   if (countries.isLoading || countries.isFetching) {
@@ -84,7 +84,7 @@ export default function CountryDetails() {
               <span className="w-full font-semibold sm:w-auto">
                 Border Countries:{" "}
               </span>
-              {borders.data ? (
+              {borders.data && Array.isArray(borders.data) ? (
                 borders.data.map((border, i) => (
                   <Border key={`border-${i}`} name={border.name.common} />
                 ))
