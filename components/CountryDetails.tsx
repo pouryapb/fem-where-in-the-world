@@ -18,7 +18,7 @@ export default function CountryDetails() {
   const borders = useQuery({
     queryKey: ["borders", countries.data![0].borders],
     queryFn: bordersQueryFn,
-    enabled: countries.isSuccess,
+    enabled: countries.isSuccess && !!countries.data[0].borders,
   });
 
   if (countries.isLoading || countries.isFetching) {
@@ -72,7 +72,7 @@ export default function CountryDetails() {
             </p>
             <p>
               <span className="font-semibold">Top Level Domain: </span>
-              {country.tld[0]}
+              {country.tld?.[0] ?? "Not found."}
             </p>
             <p>
               <span className="font-semibold">Languages: </span>
@@ -84,14 +84,16 @@ export default function CountryDetails() {
               <span className="w-full font-semibold sm:w-auto">
                 Border Countries:{" "}
               </span>
-              {borders.isFetching || borders.isLoading ? (
-                <Loading />
-              ) : borders.isSuccess ? (
+              {borders.data ? (
                 borders.data.map((border, i) => (
                   <Border key={`border-${i}`} name={border.name.common} />
                 ))
-              ) : (
+              ) : borders.isError ? (
                 <span>Failed to load borders!</span>
+              ) : borders.isLoading ? (
+                <Loading />
+              ) : (
+                <span>No Border Countries.</span>
               )}
             </p>
           </div>
