@@ -18,7 +18,7 @@ export default function CountryDetails() {
   const borders = useQuery({
     queryKey: ["borders", countries.data![0].borders],
     queryFn: bordersQueryFn,
-    enabled: countries.isSuccess && !!countries.data[0].borders,
+    enabled: countries.isSuccess && countries.data[0].borders.length !== 0,
   });
 
   if (countries.isLoading || countries.isFetching) {
@@ -72,7 +72,7 @@ export default function CountryDetails() {
             </p>
             <p>
               <span className="font-semibold">Top Level Domain: </span>
-              {country.tld?.[0] ?? "Not found."}
+              {country.tld.length > 0 ? country.tld[0] : "Not found."}
             </p>
             <p>
               <span className="font-semibold">Languages: </span>

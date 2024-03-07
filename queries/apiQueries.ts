@@ -25,12 +25,12 @@ export const countryDetailsQueryFn = (
   context: QueryFunctionContext,
 ): Promise<CountryDetailResponse[]> =>
   fetch(
-    `https://restcountries.com/v3.1/name/${context.queryKey[1]}?fullText=true`,
+    `https://restcountries.com/v3.1/name/${context.queryKey[1]}?fullText=true&fields=name,borders,tld,currencies,capital,region,subregion,languages,population,flags`,
   ).then((res) => res.json());
 
 export const bordersQueryFn = (
   context: QueryFunctionContext,
 ): Promise<BorderName[]> =>
   fetch(
-    `https://restcountries.com/v3.1/alpha?codes=${(context.queryKey[1] as string[]).join(",")}&fields=name`,
+    `https://restcountries.com/v3.1/alpha?codes=${(context.queryKey[1] as string[]).join(",")}&fields=name&fields=name,borders,tld,currencies,capital,region,subregion,languages,population,flags`,
   ).then((res) => res.json());

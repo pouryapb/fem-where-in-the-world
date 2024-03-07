@@ -1,6 +1,7 @@
 import BackNavigator from "@/components/BackNavigator";
 import CountryDetails from "@/components/CountryDetails";
-import { countryDetailsQueryFn } from "@/queries/apiQueries";
+import { bordersQueryFn, countryDetailsQueryFn } from "@/queries/apiQueries";
+import { CountryDetailResponse } from "@/types/responses";
 import {
   HydrationBoundary,
   QueryClient,
@@ -18,6 +19,17 @@ export default async function Details({
   await queryClient.prefetchQuery({
     queryKey: ["countries", searchParams["country"] ?? ""],
     queryFn: countryDetailsQueryFn,
+  });
+
+  const borders = (
+    queryClient.getQueriesData({
+      queryKey: ["countries", searchParams["country"] ?? ""],
+    })[0][1] as CountryDetailResponse[]
+  )[0].borders;
+
+  await queryClient.prefetchQuery({
+    queryKey: ["borders", borders],
+    queryFn: bordersQueryFn,
   });
 
   return (
