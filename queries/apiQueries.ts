@@ -32,5 +32,5 @@ export const bordersQueryFn = (
   context: QueryFunctionContext,
 ): Promise<BorderName[]> =>
   fetch(
-    `https://restcountries.com/v3.1/alpha?codes=${(context.queryKey[1] as string[]).join(",")}&fields=name&fields=name,borders,tld,currencies,capital,region,subregion,languages,population,flags`,
+    `https://restcountries.com/v3.1/alpha?codes=${(context.queryKey[1] as string[]).join(",")}&fields=name`,
   ).then((res) => res.json());
