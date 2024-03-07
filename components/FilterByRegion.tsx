@@ -36,7 +36,15 @@ export default function FilterByRegion() {
       <SelectTrigger className="w-[180px] dark:bg-darkBlue dark:text-white">
         <SelectValue placeholder="Filter by Region" />
       </SelectTrigger>
-      <SelectContent className="dark:bg-darkBlue dark:text-white">
+      <SelectContent
+        ref={(ref) => {
+          if (!ref) return;
+          ref.ontouchstart = (e) => {
+            e.preventDefault();
+          };
+        }}
+        className="dark:bg-darkBlue dark:text-white"
+      >
         <SelectItem className="dark:focus:bg-veryDarkBlue-darkBg" value="reset">
           Reset
         </SelectItem>
